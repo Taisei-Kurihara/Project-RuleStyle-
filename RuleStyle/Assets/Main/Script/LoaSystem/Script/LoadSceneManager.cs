@@ -8,13 +8,16 @@ using UnityEngine.SceneManagement;
 public class LoadSceneManager : SingletonMonoBehaviourBase<LoadSceneManager>
 {
     GameObject Iobj;
-    string LoadSceneName = "LoadScene";
+    string LoadSceneName = "Loadscene";
 
 
     /// <summary>
     /// 0 = LoadSceneManager“à‚Å‚Ì’l | 1 = loadscene“à‚Å‚Ì’l
     /// </summary>
     BitArray LoadStatus = new BitArray(2,false);
+
+    public void SetLoad(bool xxx) { LoadStatus[1] = xxx; }
+    public bool GetLoad() { return LoadStatus[0]; }
 
 
     private void Awake()
