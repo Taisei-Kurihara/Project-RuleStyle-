@@ -19,7 +19,7 @@ public class LoadScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LoadSceneManager loadSceneManager = LoadSceneManager.Instance();
+        UISceneManager loadSceneManager = UISceneManager.Instance();
 
         if (time > 1 && bit[1])
         {

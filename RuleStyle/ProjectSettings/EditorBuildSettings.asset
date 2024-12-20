@@ -4,5 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TitleTest.unity
+    guid: 5d3161a3944889743b7698f8dc5ead39
+  - enabled: 1
+    path: Assets/Scenes/GameTest.unity
+    guid: 1acd071df7efb004a8073bc3e4bad69e
+  - enabled: 1
+    path: Assets/Main/Script/LoaSystem/Sozai/Loadscene.unity
+    guid: aae1df01b6c858b44a4979747f9fe692
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
