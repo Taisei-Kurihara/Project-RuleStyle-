@@ -12,6 +12,11 @@ using UnityEngine.SceneManagement; // Taskを使うために必要
 public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
 {
 
+    private void Awake()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(LoadSceneName.ToString(), LoadSceneMode.Additive);
+    }
+
     #region UI
     // 現在出現しているUI
     BitArray nowUIAdvents = new BitArray(32,false);
@@ -24,6 +29,7 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
 
     // 一番最後のMaine(タイトルやゲームscene)scene
     public Call lastMainScene = Call.TitleTest;
+
     void Advent(Call call)
     {
         TimeStop();
@@ -110,9 +116,12 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
 
     #endregion
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+    //
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+
     #region ロードシーン
 
-    GameObject Iobj;
     Call LoadSceneName = Call.Loadscene;
 
 
@@ -123,13 +132,6 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
 
     public void SetLoad(bool xxx) { LoadStatus[1] = xxx; }
     public bool GetLoad() { return LoadStatus[0]; }
-
-
-    private void Awake()
-    {
-        Iobj = this.gameObject;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(LoadSceneName.ToString(), LoadSceneMode.Additive);
-    }
 
 
     /// <summary>
@@ -185,7 +187,7 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
     }
 
     /// <summary>
-    /// ロードシーンが起動するまで待つ
+    /// ロードシーンが起動したことを確認するまで待つ
     /// </summary>
     /// <param name="NextSceneName"></param>
     /// <param name="CloseSceneName"></param>
