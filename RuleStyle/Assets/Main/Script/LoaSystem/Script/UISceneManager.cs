@@ -202,9 +202,13 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
     }
 
     /// <summary>
-    /// load終了
+    /// load終了指示
     /// </summary>
-    public void LoadOut() { LoadStatus[0] = false; }
+    public void LoadOut()
+    {
+        //ロード状態のリセット
+        LoadStatus = new BitArray(2, false);
+    }
 
     #endregion
 }
