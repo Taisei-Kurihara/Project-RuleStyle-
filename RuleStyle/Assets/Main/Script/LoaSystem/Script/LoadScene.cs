@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LoadScene : MonoBehaviour
@@ -19,12 +20,19 @@ public class LoadScene : MonoBehaviour
     //フェードイン/アウト用
     CanvasGroup canvasGroup;
 
+    [SerializeField]
+    TextMeshProUGUI Test;
+
     float fadetimer = 0;
     float time = 0;
     private void Awake()
     {
         canvasGroup = canvas.GetComponent<CanvasGroup>();
         canvas.SetActive(false);
+
+
+
+        StartCoroutine(Load());
     }
 
     /// <summary>
@@ -52,9 +60,10 @@ public class LoadScene : MonoBehaviour
         { bit[3] = fade; }
     }
 
-
-    void Update()
+    IEnumerator Load()
     {
+        yield return 0;
+
         UISceneManager loadSceneManager = UISceneManager.Instance();
         
         // ロードシーンの状態を確認 
@@ -64,6 +73,8 @@ public class LoadScene : MonoBehaviour
         // フェードイン時はすぐにアクティブ化
         // フェードアウト時はフェードアウト後に非アクティブ化
         canvas.SetActive((load) ? load : bit[3]);
+
+        Test.text = "time:" + time + "\ncanvas:" + canvas.activeSelf.ToString() + "\nload:" + load + "\nbit[3]:" + bit[3];
 
         // フェードイン/アウト開始
         if (bit[1] != load && bit[2] != load) { bit[2] = load; fadetimer = 0; StartCoroutine(Fade(load)); }
@@ -75,12 +86,16 @@ public class LoadScene : MonoBehaviour
         time = (bit[1]) ? time + Time.deltaTime : 0;
 
         // ロードシーン終了を確認
-        bit[0] = (time > 1 && bit[1]) ? true : false;
+        bool check = (time > 1 && bit[1]) ? true : false;
 
         // ロードシーンが出現したことを報告
-        if (bit[0])
+        // 重複して送信しないようにしている
+        if (bit[0] != check)
         {
+            bit[0] = check;
             loadSceneManager.SetLoad(bit[0]);
         }
+
+        StartCoroutine(Load());
     }
 }

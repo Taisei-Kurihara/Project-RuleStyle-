@@ -165,6 +165,8 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
     public void LoadIn(Call NextSceneName, Call CloseSceneName)
     {
 
+        LoadStatus[0] = true;
+
         int sceneCount = SceneManager.sceneCount;
 
         bool Load = true;
@@ -178,8 +180,6 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(LoadSceneName.ToString(), LoadSceneMode.Additive);
         }
-
-        LoadStatus[0] = true;
 
         if(CloseSceneName == Call.Now) { CloseSceneName = lastMainScene; }
 
@@ -207,7 +207,7 @@ public class UISceneManager : SingletonMonoBehaviourBase<UISceneManager>
     public void LoadOut()
     {
         //ロード状態のリセット
-        LoadStatus = new BitArray(2, false);
+        LoadStatus[0] = false;
     }
 
     #endregion
